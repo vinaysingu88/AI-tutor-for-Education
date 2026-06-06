@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor | Assistant</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body { overflow: hidden; } /* Prevent global scroll for app feel */
+        .chat-layout { display: flex; height: calc(100vh - 70px); }
+        .sidebar { width: 280px; background: var(--color-gray); padding: 20px; display: flex; flex-direction: column; gap: 20px; border-right: 1px solid var(--glass-border); }
+        .sidebar h4 { font-size: 0.85rem; color: var(--color-text-muted); text-transform: uppercase; margin-bottom: 10px; }
+        .history-item { padding: 10px; border-radius: 8px; cursor: pointer; font-size: 0.9rem; transition: background 0.2s; }
+        .history-item:hover { background: rgba(0,0,0,0.05); }
+        
+        .main-chat { flex: 1; display: flex; flex-direction: column; background: var(--color-white); }
+        .chat-messages { flex: 1; padding: 40px; overflow-y: auto; display: flex; flex-direction: column; gap: 24px; }
+        
+        .msg { max-width: 70%; padding: 16px 20px; border-radius: 16px; font-size: 0.95rem; }
+        .msg-ai { background: var(--color-gray); align-self: flex-start; border-bottom-left-radius: 4px; }
+        .msg-user { background: var(--color-forest); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+
+        .input-area { padding: 24px 40px; border-top: 1px solid var(--glass-border); }
+        .input-box {
+            display: flex; align-items: center; gap: 12px; background: var(--color-gray);
+            padding: 12px 20px; border-radius: 50px;
+        }
+        .input-box input { flex: 1; background: transparent; border: none; outline: none; font-size: 1rem; }
+        .icon-btn {
+            background: none; border: none; cursor: pointer; color: var(--color-text-muted);
+            font-size: 1.2rem; transition: color 0.2s;
+        }
+        .icon-btn:hover { color: var(--color-forest); }
+        .recording { color: #dc2626 !important; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><div class="logo-icon">AI</div> AI Tutor</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="aiassistant.html" class="active">AI Assistant</a></li>
+                <li><a href="attendance.html">Attendance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="chat-layout">
+        <div class="sidebar">
+            <button class="btn-outline" style="width: 100%;">+ New Chat</button>
+            <div style="flex: 1; overflow-y: auto;">
+                <h4>Recent Conversations</h4>
+                <div class="history-item">Explain Quantum Physics</div>
+                <div class="history-item">Python Array Sorting</div>
+                <div class="history-item">History of Rome</div>
+                <h4 style="margin-top: 20px;">Saved Chats</h4>
+                <div class="history-item">Calculus Formulas</div>
+            </div>
+            <button class="btn-outline" style="border: none; text-align: left;">⚙️ Settings</button>
+        </div>
+        
+        <div class="main-chat">
+            <div class="chat-messages" id="chatBox">
+                <div class="msg msg-ai">Hello! I am your AI Tutor. What would you like to learn today?</div>
+            </div>
+            <div class="input-area">
+                <div class="input-box">
+                    <button class="icon-btn" title="Attach File">📎</button>
+                    <input type="text" id="chatInput" placeholder="Type your message or use voice...">
+                    <button class="icon-btn" id="voiceBtn" title="Start Recording">🎤</button>
+                    <button class="icon-btn" id="sendBtn" style="color: var(--color-forest);">➤</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/aiassistant.js"></script>
+</body>
+</html>

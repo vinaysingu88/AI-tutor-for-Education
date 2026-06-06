@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tutor | Attendance</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard-header { margin: 40px 0 24px; display: flex; justify-content: space-between; align-items: center; }
+        .stat-card h3 { color: var(--color-text-muted); font-size: 1rem; font-weight: 500; }
+        .stat-card .num { font-size: 2.5rem; font-weight: 800; color: var(--color-bunker); }
+        
+        .filters { display: flex; gap: 12px; margin-bottom: 24px; }
+        .filter-btn { padding: 6px 16px; border-radius: 50px; border: 1px solid var(--glass-border); background: var(--color-white); cursor: pointer; transition: all 0.2s; font-weight: 600;}
+        .filter-btn.active { background: var(--color-bunker); color: white; }
+
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        th, td { padding: 16px 24px; text-align: left; border-bottom: 1px solid var(--glass-border); }
+        th { background: var(--color-gray); font-weight: 600; color: var(--color-text-muted); }
+        tr:hover { background: rgba(0,0,0,0.01); }
+        
+        .analytics-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; margin-top: 40px; }
+        .progress-bar { width: 100%; height: 12px; background: var(--color-gray); border-radius: 10px; margin-top: 8px; overflow: hidden;}
+        .progress-fill { height: 100%; background: var(--color-forest); width: 85%; }
+        
+        /* CSS Pie Chart trick */
+        .pie-chart { width: 150px; height: 150px; border-radius: 50%; margin: 0 auto; background: conic-gradient(var(--color-forest) 0% 85%, #dc2626 85% 100%); }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><div class="logo-icon">AI</div> AI Tutor</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="aiassistant.html">AI Assistant</a></li>
+                <li><a href="attendance.html" class="active">Attendance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-bottom: 80px;">
+        <div class="dashboard-header">
+            <h2>Real-time Attendance Dashboard</h2>
+            <button class="btn-primary">Generate Report</button>
+        </div>
+
+        <div class="grid-4" style="margin-bottom: 40px;">
+            <div class="glass-card stat-card"><h3>Total Students</h3><div class="num">100</div></div>
+            <div class="glass-card stat-card"><h3>Present</h3><div class="num" style="color: var(--color-forest);">85</div></div>
+            <div class="glass-card stat-card"><h3>Absent</h3><div class="num" style="color: #dc2626;">15</div></div>
+            <div class="glass-card stat-card"><h3>Attendance Rate</h3><div class="num">85%</div></div>
+        </div>
+
+        <div class="filters" id="filterContainer">
+            <button class="filter-btn active" data-filter="all">ALL</button>
+            <button class="filter-btn" data-filter="present">PRESENT</button>
+            <button class="filter-btn" data-filter="absent">ABSENT</button>
+        </div>
+
+        <table id="attendanceTable">
+            <thead>
+                <tr><th>Student ID</th><th>Name</th><th>Date</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr data-status="present"><td>STU-001</td><td>Alice Johnson</td><td>Oct 24, 2026</td><td><span class="badge badge-present">Present</span></td></tr>
+                <tr data-status="present"><td>STU-002</td><td>Bob Smith</td><td>Oct 24, 2026</td><td><span class="badge badge-present">Present</span></td></tr>
+                <tr data-status="absent"><td>STU-003</td><td>Charlie Davis</td><td>Oct 24, 2026</td><td><span class="badge badge-absent">Absent</span></td></tr>
+                <tr data-status="present"><td>STU-004</td><td>Diana Prince</td><td>Oct 24, 2026</td><td><span class="badge badge-present">Present</span></td></tr>
+            </tbody>
+        </table>
+
+        <div class="analytics-grid">
+            <div class="glass-card" style="text-align: center;">
+                <h3>Today's Ratio</h3>
+                <div class="pie-chart" style="margin: 24px auto;"></div>
+                <div style="display:flex; justify-content:center; gap: 16px; font-size: 0.9rem;">
+                    <span>🟢 85% Present</span> <span>🔴 15% Absent</span>
+                </div>
+            </div>
+            <div class="glass-card">
+                <h3>Overall Progress (Weekly)</h3>
+                <div style="margin-top: 40px;">
+                    <p style="display:flex; justify-content:space-between;"><span>Overall Attendance Goal</span> <span>85%</span></p>
+                    <div class="progress-bar"><div class="progress-fill"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/attendance.js"></script>
+</body>
+</html>
